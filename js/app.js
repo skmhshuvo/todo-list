@@ -1,24 +1,23 @@
-const addTodoList = () =>{
-    const todoInput = document.getElementById('input');
-    const newTodo = todoInput.value;
-    saveTodoOnLocalStorage(newTodo);
-    console.log(newTodo);
-    todoInput.value = '';
+const addTodoList = () => {
+    const inputField = document.getElementById('input');
+    const input = inputField.value;
+    saveTodoOnLocal(input);
+    console.log(input);
+    inputField.value = '';
 }
 
-
-const getTodoFromLocalStorage = () => {
+const getTodoFromLocal = () => {
+    let todos = [];
     let savedTodo = localStorage.getItem('todo');
-    let todo = [];
-    if(savedTodo) {
-        todo = [savedTodo];
+    if(savedTodo){
+        todos = JSON.parse(savedTodo);
     }
-    return todo;
+    return todos;
 }
 
-
-const saveTodoOnLocalStorage = item => {
-    const todo = getTodoFromLocalStorage();
-    todo.push(item);
-    localStorage.setItem('todo', todo);
+const saveTodoOnLocal = item => {
+    const todos = getTodoFromLocal();
+    todos.push(item);
+    localStorage.setItem('todo', JSON.stringify(todos));
+    console.log(todos);
 }
